@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+
+
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %} - Theo's Website</title>
+    {% endblock %}
+</head>
+
+<div>
+  Shortcuts:
+  <a href={{ url_for('index') }}>Home</a>
+  <a href={{ url_for('numbers') }}>Prime Calculator</a>
+  <a href={{ url_for('dashboard') }}>Market Dashboard</a>
+</div>
+
+<body>
+
+
+  <div id="content">{% block content %}{% endblock %}</div>
+
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+          {% for message in messages %}
+          <b>{{ message }} </b>
+          <br>
+          {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+
+</body>
+
+  <hr>
+
+  <div id="footer">
+    {% block footer %}
+    &copy; Copyright 2019 by <a href="https://www.linkedin.com/in/theodore-ellis-cfa-75b8284/">Theo Ellis</a>.
+    <br>Site built using Python, Flask, and deployed on Heroku
+    {% endblock %}
+  </div>
+
+</html>
