@@ -2,6 +2,7 @@ from flask import Flask, url_for, request, render_template, request, flash
 from config import Config
 from forms import PrimeCalc
 from primecalc import prime_calc
+from dashboard import today_value
 
 app = Flask(__name__, template_folder='templates')
 app.config.from_object(Config)
@@ -19,7 +20,8 @@ def hello(name=None):
 
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
-    return render_template('dashboard.html',title='Market Dashboard')
+    todays_value = today_value()
+    return render_template('dashboard.html',title='Market Dashboard', todays_value=todays_value)
 
 @app.route('/user/<username>')
 def profile(username):
