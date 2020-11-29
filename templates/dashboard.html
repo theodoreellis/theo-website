@@ -2,10 +2,30 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+</style>
+</head>
 
   <h1>Market Dashboard</h1>
   <h2>Market Signals</h2>
 
-<p>Latest 10Y yield is {{ todays_value }} </p>
+<table style="width:30%">
+  <tr>
+    <th>Instrument</th>
+    <th>Most recent</th>
+    <th>Change</th>
+  </tr>
+  <tr>
+    <td>10 Year Yield</td>
+    <td>{{ todays_value }}</td>
+    <td>0</td>
+</table>
+
+<br>
+<p>Data source is St. Louis Federal Reserve (FRED) API</p>
 {% endblock %}
