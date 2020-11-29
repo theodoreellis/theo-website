@@ -2,12 +2,12 @@ from flask import Flask, url_for, request, render_template, request, flash
 from config import Config
 from forms import PrimeCalc
 from primecalc import prime_calc
-from dashboard import today_value
+from dashboard import today_value, last_month_value, last_year_value
 import database
 
 app = Flask(__name__, template_folder='templates')
 app.config.from_object(Config)
-#database.init_app(app)
+database.init_app(app)
 
 
 @app.route('/')
@@ -23,7 +23,9 @@ def hello(name=None):
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
     todays_value = today_value()
-    return render_template('dashboard.html',title='Market Dashboard', todays_value=todays_value)
+    last_months_value = last_month_value()
+    last_years_value = last_year_value()
+    return render_template('dashboard.html',title='Market Dashboard', todays_value=todays_value, last_months_value = last_months_value, last_years_value = last_years_value)
 
 @app.route('/user/<username>')
 def profile(username):

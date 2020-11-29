@@ -18,12 +18,14 @@ table, th, td {
   <tr>
     <th>Instrument</th>
     <th>Most recent</th>
-    <th>Change</th>
+    <th>Last month</th>
+    <th>Last year-end</th>
   </tr>
   <tr>
     <td>10 Year Yield</td>
     <td>{{ todays_value }}</td>
-    <td>0</td>
+    <td>{{ last_months_value }}</td>
+    <td>{{ last_years_value }}</td>
 </table>
 
 <br>

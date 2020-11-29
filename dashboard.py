@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 
 #set dates based on today's date
 
+
+
 def today_value():
 
     def buffer(x):
@@ -37,6 +39,66 @@ def today_value():
     today_value = r["observations"][0]["value"]
     return today_value
 
+
+
+def last_month_value():
+
+    def buffer(x):
+        x = x - timedelta(days=7)
+        return x
+
+    last_month_end_date = datetime.today().replace(day=1)
+    last_month_end_date = last_month_end_date - timedelta(days=1)
+    last_month_start_date = buffer(last_month_end_date)
+
+
+    payload = {
+        "series_id" : "DGS10",
+        "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
+        "file_type" : "json",
+        "frequency" : "d",
+        "observation_start" : last_month_start_date.strftime('%Y-%m-%d'),
+        "observation_end" : last_month_end_date.strftime('%Y-%m-%d'),
+        "sort_order" : "desc"
+    }
+
+    r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=payload)
+    r = r.json()
+    #print("ten year yield as of " + today_start_date.strftime('%Y-%m-%d'))
+    #print(r["observations"][0]["value"])
+
+    last_month_value = r["observations"][0]["value"]
+    return last_month_value
+
+
+def last_year_value():
+
+    def buffer(x):
+        x = x - timedelta(days=7)
+        return x
+
+    last_year_end_date = datetime.today() - timedelta(days=365)
+    last_year_end_date = last_year_end_date.replace(day=31, month=12)
+    last_year_start_date = buffer(last_year_end_date)
+
+    payload = {
+        "series_id" : "DGS10",
+        "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
+        "file_type" : "json",
+        "frequency" : "d",
+        "observation_start" : last_year_start_date.strftime('%Y-%m-%d'),
+        "observation_end" : last_year_end_date.strftime('%Y-%m-%d'),
+        "sort_order" : "desc"
+    }
+
+    r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=payload)
+    r = r.json()
+    #print("ten year yield as of " + today_start_date.strftime('%Y-%m-%d'))
+    #print(r["observations"][0]["value"])
+
+    last_year_value = r["observations"][0]["value"]
+    return last_year_value
+
 #payload = {
 #    "series_id" : "DGS10",
 #    "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
@@ -47,8 +109,6 @@ def today_value():
 #    "sort_order" : "desc"
 #}
 
-
-print(today_value())
 #r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=payload)
 #r = r.json()
 
