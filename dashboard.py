@@ -7,7 +7,8 @@ from datetime import datetime, timedelta
 
 
 
-def today_value():
+
+def today_value(series):
 
     def buffer(x):
         x = x - timedelta(days=7)
@@ -22,7 +23,7 @@ def today_value():
 
 
     payload = {
-        "series_id" : "DGS10",
+        "series_id" : series,
         "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
         "file_type" : "json",
         "frequency" : "d",
@@ -41,7 +42,7 @@ def today_value():
 
 
 
-def last_month_value():
+def last_month_value(series):
 
     def buffer(x):
         x = x - timedelta(days=7)
@@ -53,7 +54,7 @@ def last_month_value():
 
 
     payload = {
-        "series_id" : "DGS10",
+        "series_id" : series,
         "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
         "file_type" : "json",
         "frequency" : "d",
@@ -71,7 +72,7 @@ def last_month_value():
     return last_month_value
 
 
-def last_year_value():
+def last_year_value(series):
 
     def buffer(x):
         x = x - timedelta(days=7)
@@ -82,7 +83,7 @@ def last_year_value():
     last_year_start_date = buffer(last_year_end_date)
 
     payload = {
-        "series_id" : "DGS10",
+        "series_id" : series,
         "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
         "file_type" : "json",
         "frequency" : "d",
@@ -99,18 +100,28 @@ def last_year_value():
     last_year_value = r["observations"][0]["value"]
     return last_year_value
 
-#payload = {
-#    "series_id" : "DGS10",
-#    "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
-#    "file_type" : "json",
-#    "frequency" : "d",
-#    "observation_start" : last_month_start_date.strftime('%Y-%m-%d'),
-#    "observation_end" : last_month_end_date.strftime('%Y-%m-%d'),
-#    "sort_order" : "desc"
-#}
 
-#r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=payload)
-#r = r.json()
+def get_series():
+    series = ["DGS1","DGS2","DGS5","DGS10"]
+    series_names = {
+    "DGS1" : "1Y US Treasury",
+    "DGS2" : "2Y US Treasury",
+    "DGS5" : "5Y US Treasury",
+    "DGS10" : "10Y US Treasury"
+    }
+    return series, series_names
 
-#print("ten year yield as of " + last_month_end_date.strftime('%Y-%m-%d'))
-#print(r["observations"][0]["value"])
+def collect_values():
+    series, series_names = get_series()
+    values = [[],[],[],[]]
+    #for i in range(0,len(series)):
+    #    values.append([])
+    for x in series:
+        todays_values = today_value(x)
+        values[0].append(todays_values)
+        last_months_values = last_month_value(x)
+        values[1].append(last_months_values)
+        last_years_values = last_year_value(x)
+        values[2].append(last_years_values)
+        values[3].append(series_names[x])
+    return values

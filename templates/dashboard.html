@@ -21,11 +21,14 @@ table, th, td {
     <th>Last month</th>
     <th>Last year-end</th>
   </tr>
+  {% set list_length = series_name|length %}
+  {% for x in range(list_length) %}
   <tr>
-    <td>10 Year Yield</td>
-    <td>{{ todays_value }}</td>
-    <td>{{ last_months_value }}</td>
-    <td>{{ last_years_value }}</td>
+    <td>{{ series_name[x] }}</td>
+    <td>{{ todays_value[x] }}</td>
+    <td>{{ last_months_value[x] }}</td>
+    <td>{{ last_years_value[x] }}</td>
+  {% endfor %}
 </table>
 
 <br>
