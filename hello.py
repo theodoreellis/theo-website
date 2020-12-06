@@ -25,7 +25,8 @@ def dashboard():
     todays_value = today_value()
     last_months_value = last_month_value()
     last_years_value = last_year_value()
-    return render_template('dashboard.html',title='Market Dashboard', todays_value=todays_value, last_months_value = last_months_value, last_years_value = last_years_value)
+    three_values = [0,1,2]
+    return render_template('dashboard.html',title='Market Dashboard',three_values=three_values, todays_value=todays_value, last_months_value = last_months_value, last_years_value = last_years_value)
 
 @app.route('/user/<username>')
 def profile(username):
