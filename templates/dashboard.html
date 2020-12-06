@@ -19,7 +19,15 @@ table, th, td {
     <th>Instrument</th>
     <th>Most recent</th>
     <th>Last month</th>
+    <th>Last quarter-end</th>
     <th>Last year-end</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td> {{ series_dates[0] }}</td>
+    <td> {{ series_dates[1] }}</td>
+    <td> {{ series_dates[2] }}</td>
+    <td> {{ series_dates[3] }}</td>
   </tr>
   {% set list_length = series_name|length %}
   {% for x in range(list_length) %}
@@ -27,6 +35,7 @@ table, th, td {
     <td>{{ series_name[x] }}</td>
     <td>{{ todays_value[x] }}</td>
     <td>{{ last_months_value[x] }}</td>
+    <td>{{ last_quarters_value[x] }}</td>
     <td>{{ last_years_value[x] }}</td>
   {% endfor %}
 </table>
