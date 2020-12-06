@@ -17,11 +17,6 @@ def today_value(series):
     today_end_date = datetime.today()
     today_start_date = buffer(today_end_date)
 
-    #last_month_end_date = datetime.today().replace(day=1)
-    #last_month_end_date = last_month_end_date - timedelta(days=1)
-    #last_month_start_date = buffer(last_month_end_date)
-
-
     payload = {
         "series_id" : series,
         "api_key" : "fe2f1e3d86308243b33bd5adc4174e6a",
@@ -34,8 +29,6 @@ def today_value(series):
 
     r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=payload)
     r = r.json()
-    #print("ten year yield as of " + today_start_date.strftime('%Y-%m-%d'))
-    #print(r["observations"][0]["value"])
 
     today_value = r["observations"][0]["value"]
     today_date = r["observations"][0]["date"]
@@ -143,7 +136,7 @@ def last_year_value(series):
 
 
 def get_series():
-    series = ["DGS1","DGS2","DGS5","DGS10"]
+    series = ["DGS1","DGS2","DGS5","DGS10","DGS30"]
     series_names = {
     "DGS1" : "1Y US Treasury",
     "DGS2" : "2Y US Treasury",
@@ -156,8 +149,7 @@ def get_series():
 def collect_values():
     series, series_names = get_series()
     values = [[],[],[],[],[],[]]
-    #for i in range(0,len(series)):
-    #    values.append([])
+
     for x in series:
         todays_values, todays_date = today_value(x)
         values[0].append(todays_values)

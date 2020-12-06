@@ -3,7 +3,7 @@ from config import Config
 from forms import PrimeCalc
 from primecalc import prime_calc
 from dashboard import collect_values
-import database
+
 
 app = Flask(__name__, template_folder='templates')
 app.config.from_object(Config)
