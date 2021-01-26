@@ -150,14 +150,20 @@ def last_year_value(series):
 
 
 def get_series():
-    series = ["DGS1","DGS2","DGS5","DGS10","DGS30","BAMLH0A0HYM2"]
+    series = ["DGS1","DGS2","DGS5","DGS10","DGS30","BAMLH0A0HYM2","BAMLC0A0CM,""BAMLC0A4CBBB","BAMLC0A3CA","BAMLC0A2CAA","BAMLC0A1CAAA"]
     series_names = {
     "DGS1" : "1Y US Treasury",
     "DGS2" : "2Y US Treasury",
     "DGS5" : "5Y US Treasury",
     "DGS10" : "10Y US Treasury",
     "DGS30" : "30Y US Treasury",
-    "BAMLH0A0HYM2" : "US High Yield OAS"
+    "BAMLH0A0HYM2" : "US High Yield OAS",
+    "BAMLC0A0CM" : "US IG Corporate OAS",
+    "BAMLC0A4CBBB" : "BBB Corp OAS",
+    "BAMLC0A3CA" : "A Corp OAS",
+    "BAMLC0A2CAA" : "AA Corp OAS",
+    "BAMLC0A1CAAA": "AAA Corp OAS"
+
     }
     return series, series_names
 
