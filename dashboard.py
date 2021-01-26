@@ -162,7 +162,7 @@ def get_series():
     "BAMLC0A4CBBB" : "BBB Corp OAS",
     "BAMLC0A3CA" : "A Corp OAS",
     "BAMLC0A2CAA" : "AA Corp OAS",
-    "BAMLC0A1CAAA": "AAA Corp OAS"
+    "BAMLC0A1CAAA": "AAA Corp OAS",
 
     }
     return series, series_names
