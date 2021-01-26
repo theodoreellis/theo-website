@@ -68,23 +68,38 @@ def last_month_value(series):
 
 def last_quarter_value(series):
 
-    today = datetime.today()
-    if today.month == 10 or 11 or 12:
-        today = today.replace(month=9,day=30)
-    elif today.month == 7 or 8 or 9:
-        today = today.replace(month=6,day=30)
-    elif today.month == 4 or 5 or 6:
-        today = today.replace(month=3,day=31)
-    elif today.month == 1 or 2 or 3:
-        today = today.replace(month=1, day=1 )
-        today = today - timedelta(days=1)
+    #today = datetime.today()
+    #if today.month == 10 or 11 or 12:
+    #    today = today.replace(month=9,day=30)
+    #elif today.month == 7 or 8 or 9:
+    #    today = today.replace(month=6,day=30)
+    #elif today.month == 4 or 5 or 6:
+    #    today = today.replace(month=3,day=31)
+    #elif today.month == 1 or 2 or 3:
+    #    today = datetime.today() - timedelta(days=365)
+    #    today = today.replace(day=31, month =12)
 
     def buffer(x):
         x = x - timedelta(days=7)
         return x
 
-    last_quater_end_date = today
-    last_quarter_start_date = buffer(last_quater_end_date)
+    today = datetime.today()
+    if today.month in (1,2,3):
+        last_quarter_end_date = datetime.today() - timedelta(days=365)
+        last_quarter_end_date = last_quarter_end_date.replace(day=31,month=12)
+        last_quarter_start_date = buffer(last_quarter_end_date)
+    if today.month in (10,11,12):
+        today = today.replace(month=9,day=30)
+        last_quarter_end_date = today
+        last_quarter_start_date = buffer(last_quarter_end_date)
+    if today.month in (7,8,9):
+        today = today.replace(month=6,day=30)
+        last_quarter_end_date = today
+        last_quarter_start_date = buffer(last_quarter_end_date)
+    if today.month in (4,5,6):
+        today = today.replace(month=3,day=31)
+        last_quarter_end_date = today
+        last_quarter_start_date = buffer(last_quarter_end_date)
 
     payload = {
         "series_id" : series,
@@ -92,13 +107,12 @@ def last_quarter_value(series):
         "file_type" : "json",
         "frequency" : "d",
         "observation_start" : last_quarter_start_date.strftime('%Y-%m-%d'),
-        "observation_end" : last_quater_end_date.strftime('%Y-%m-%d'),
+        "observation_end" : last_quarter_end_date.strftime('%Y-%m-%d'),
         "sort_order" : "desc"
     }
 
     r = requests.get('https://api.stlouisfed.org/fred/series/observations', params=payload)
     r = r.json()
-
     last_quarter_value = r["observations"][0]["value"]
     last_quarter_date = r["observations"][0]["date"]
 
@@ -136,13 +150,14 @@ def last_year_value(series):
 
 
 def get_series():
-    series = ["DGS1","DGS2","DGS5","DGS10","DGS30"]
+    series = ["DGS1","DGS2","DGS5","DGS10","DGS30","BAMLH0A0HYM2"]
     series_names = {
     "DGS1" : "1Y US Treasury",
     "DGS2" : "2Y US Treasury",
     "DGS5" : "5Y US Treasury",
     "DGS10" : "10Y US Treasury",
-    "DGS30" : "30Y US Treasury"
+    "DGS30" : "30Y US Treasury",
+    "BAMLH0A0HYM2" : "US High Yield OAS"
     }
     return series, series_names
 

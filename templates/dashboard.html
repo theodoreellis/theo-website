@@ -14,6 +14,7 @@ table, th, td {
   <h1>Market Dashboard</h1>
   <h2>Market Signals</h2>
 
+<b>US Sovereign Rates</b>
 <table style="width:30%">
   <tr>
     <th>Instrument</th>
@@ -29,8 +30,8 @@ table, th, td {
     <td> {{ series_dates[2] }}</td>
     <td> {{ series_dates[3] }}</td>
   </tr>
-  {% set list_length = series_name|length %}
-  {% for x in range(list_length) %}
+
+  {% for x in range(0,5) %}
   <tr>
     <td>{{ series_name[x] }}</td>
     <td>{{ todays_value[x] }}</td>
@@ -41,5 +42,36 @@ table, th, td {
 </table>
 
 <br>
+
+<b>Spread Products</b>
+<table style="width:30%">
+  <tr>
+    <th>Instrument</th>
+    <th>Most recent</th>
+    <th>Last month</th>
+    <th>Last quarter-end</th>
+    <th>Last year-end</th>
+  </tr>
+  <tr>
+    <td></td>
+    <td> {{ series_dates[0] }}</td>
+    <td> {{ series_dates[1] }}</td>
+    <td> {{ series_dates[2] }}</td>
+    <td> {{ series_dates[3] }}</td>
+  </tr>
+
+  {% for x in range(5,6) %}
+  <tr>
+    <td>{{ series_name[x] }}</td>
+    <td>{{ todays_value[x] }}</td>
+    <td>{{ last_months_value[x] }}</td>
+    <td>{{ last_quarters_value[x] }}</td>
+    <td>{{ last_years_value[x] }}</td>
+  {% endfor %}
+</table>
+
+<br>
+
 <p>Data source is St. Louis Federal Reserve (FRED) API</p>
+
 {% endblock %}
