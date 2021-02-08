@@ -22,6 +22,7 @@ table, th, td {
     <th>Last month</th>
     <th>Last quarter-end</th>
     <th>Last year-end</th>
+    <th>Change YTD</th>
   </tr>
   <tr>
     <td></td>
@@ -29,6 +30,7 @@ table, th, td {
     <td> {{ series_dates[1] }}</td>
     <td> {{ series_dates[2] }}</td>
     <td> {{ series_dates[3] }}</td>
+    <td>bps</td>
   </tr>
 
   {% for x in range(0,5) %}
@@ -38,6 +40,7 @@ table, th, td {
     <td>{{ last_months_value[x] }}</td>
     <td>{{ last_quarters_value[x] }}</td>
     <td>{{ last_years_value[x] }}</td>
+    <td>{{ YTDChange[x] }}</td>
   {% endfor %}
 </table>
 
@@ -51,6 +54,8 @@ table, th, td {
     <th>Last month</th>
     <th>Last quarter-end</th>
     <th>Last year-end</th>
+    <th>Change YTD</th>
+
   </tr>
   <tr>
     <td></td>
@@ -58,15 +63,17 @@ table, th, td {
     <td> {{ series_dates[1] }}</td>
     <td> {{ series_dates[2] }}</td>
     <td> {{ series_dates[3] }}</td>
+    <td>bps</td>
   </tr>
 
-  {% for x in range(5,7) %}
+  {% for x in range(5,11) %}
   <tr>
     <td>{{ series_name[x] }}</td>
     <td>{{ todays_value[x] }}</td>
     <td>{{ last_months_value[x] }}</td>
     <td>{{ last_quarters_value[x] }}</td>
     <td>{{ last_years_value[x] }}</td>
+    <td>{{ YTDChange[x] }}</td>
   {% endfor %}
 </table>
 

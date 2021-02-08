@@ -24,7 +24,7 @@ def hello(name=None):
 def dashboard():
     values = collect_values()
     #three_values = [0,1,2]
-    return render_template('dashboard.html',title='Market Dashboard', todays_value=values[0], last_months_value = values[1], last_quarters_value = values[2], last_years_value = values[3], series_name = values[4], series_dates = values[5])
+    return render_template('dashboard.html',title='Market Dashboard', todays_value=values[0], last_months_value = values[1], last_quarters_value = values[2], last_years_value = values[3], series_name = values[4], series_dates = values[5], YTDChange = values[6])
 
 @app.route('/user/<username>')
 def profile(username):

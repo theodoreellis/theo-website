@@ -150,7 +150,7 @@ def last_year_value(series):
 
 
 def get_series():
-    series = ["DGS1","DGS2","DGS5","DGS10","DGS30","BAMLH0A0HYM2","BAMLC0A0CM,""BAMLC0A4CBBB","BAMLC0A3CA","BAMLC0A2CAA","BAMLC0A1CAAA"]
+    series = ["DGS1","DGS2","DGS5","DGS10","DGS30","BAMLH0A0HYM2","BAMLC0A0CM","BAMLC0A4CBBB","BAMLC0A3CA","BAMLC0A2CAA","BAMLC0A1CAAA"]
     series_names = {
     "DGS1" : "1Y US Treasury",
     "DGS2" : "2Y US Treasury",
@@ -169,7 +169,7 @@ def get_series():
 
 def collect_values():
     series, series_names = get_series()
-    values = [[],[],[],[],[],[]]
+    values = [[],[],[],[],[],[],[]]
 
     for x in series:
         todays_values, todays_date = today_value(x)
@@ -182,4 +182,5 @@ def collect_values():
         values[3].append(last_years_values)
         values[4].append(series_names[x])
         values[5] = [todays_date, last_month_date, last_quarters_date, last_years_date]
+        values[6].append(100*round((float(todays_values)-float(last_years_values)),2))
     return values
