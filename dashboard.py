@@ -182,5 +182,5 @@ def collect_values():
         values[3].append(last_years_values)
         values[4].append(series_names[x])
         values[5] = [todays_date, last_month_date, last_quarters_date, last_years_date]
-        values[6].append(100*round((float(todays_values)-float(last_years_values)),2))
+        values[6].append(str(round(100*((float(todays_values)-float(last_years_values))),0)))
     return values
