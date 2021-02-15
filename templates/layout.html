@@ -16,26 +16,10 @@
   <a href={{ url_for('index') }}>Home</a>
   <a href={{ url_for('numbers') }}>Prime Calculator</a>
   <a href={{ url_for('dashboard') }}>Market Dashboard</a>
+  <a href={{ url_for('thewall') }}>The Wall</a>
 </div>
 
-<body>
 
-
-  <div id="content">{% block content %}{% endblock %}</div>
-
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-          <b>{{ message }} </b>
-          <br>
-          {% endfor %}
-        </ul>
-    {% endif %}
-    {% endwith %}
-
-</body>
 
   <hr>
 
