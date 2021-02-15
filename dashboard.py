@@ -8,20 +8,6 @@ import psycopg2
 #set dates based on today's date
 
 
-
-
-def databasetest():
-
-    DATABASE_URL = os.environ['DATABASE_URL']
-    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-    cur = conn.cursor()
-    cur.execute("""SELECT * FROM customers""")
-    query_results = cur.fetchall()
-    cur.close()
-    conn.close()
-    return query_results
-
-
 def today_value(series):
 
     def buffer(x):
@@ -183,7 +169,7 @@ def get_series():
 
 def collect_values():
     series, series_names = get_series()
-    values = [[],[],[],[],[],[],[],[]]
+    values = [[],[],[],[],[],[],[]]
 
     for x in series:
         todays_values, todays_date = today_value(x)
@@ -197,6 +183,4 @@ def collect_values():
         values[4].append(series_names[x])
         values[5] = [todays_date, last_month_date, last_quarters_date, last_years_date]
         values[6].append(str(round(100*((float(todays_values)-float(last_years_values))),0)))
-        query_results = databasetest()
-        values[7].append(query_results)
     return values

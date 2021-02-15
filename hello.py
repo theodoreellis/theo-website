@@ -24,7 +24,6 @@ def hello(name=None):
 def thewall():
     return render_template('thewall.html')
 
-
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
     values = collect_values()
