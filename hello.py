@@ -20,6 +20,11 @@ def index():
 def hello(name=None):
     return render_template('hello.html',name=name)
 
+@app.route('/thewall', methods=['GET','POST'])
+def thewall():
+    return render_template('thewall.html')
+
+
 @app.route('/dashboard', methods=['GET','POST'])
 def dashboard():
     values = collect_values()
